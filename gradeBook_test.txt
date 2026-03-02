@@ -1,0 +1,24 @@
+Year: 2025-2026
+
+Quarter:
+
+Fall:
+Classes:
+<> History, A, 4
+<> Social Studies, B, 3
+
+Winter:
+Classes:
+<> English, NR, 3
+-- Assignments
+/\ Reading 1, Weight: 9, Grade: 85
+/\ Reading 2, Weight: 11, Grade: 91
+/\ Reading 3, Weight: 8, Grade: 99
+/\ Reading 4, Weight: 12, Grade: 70
+-- Exams
+/\ Exam 1, Weight: 15, Grade: 89
+/\ Exam 2, Weight: 20, Grade: 90
+/\ Final, Weight: 25, Grade: 85
+!! Math, NR, 4
+Science, NR, 5
+Coding, NR, 4
