@@ -1,0 +1,22 @@
+Year: 2025-2026
+Quarter:
+Fall
+Contemporary Biology,A,4
+Fundamentals of Programming I,A,4
+University Experience,S,1
+Calculus I,A-,4
+Intro to Psychology: Social Foundations,A,4
+
+Winter
+Fundamentals of Programming II,NR,4
+A: Concept 1, W 5.8, Concept 2, W 5.8, Concept 3, W 5.8, Concept 4, W 5.8, Concept 5, W 5.8, Concept 6, W 5.8, Concept 7, W 5.8, Concept 8, W 5.8, Concept 9, W 5.8, Concept 10, W 5.8, Concept 11, W 5.8, Concept 12, W 5.8 
+E: Project 1, 10, Project 2, 10, Project 10.4
+Intro to Analytical Writing,NR,3
+A: TestClassA, 25, Second TestClassA, 10
+E: TestExamA, 15, TestFinalA, 50
+Calculus II,NR,4
+A: TestClassC, 25, Second TestClassC, 10
+E: TestExamC, 15, TestFinalC, 50
+Small Group Communication,NR,4
+A: TestClassG, 25, Second TestClassG, 10
+E: TestExamG, 15, TestFinalG, 50
