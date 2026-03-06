@@ -1,6 +1,9 @@
 #pragma once
 
+#include "Gradebook.h"
 #include <string>
 #include <vector>
 
-void openGradeBook(std::string fileName, std::vector<std::string>& prevGrades, std::vector<int>& prevCredits);
+std::string trimWhitespace(std::string beforeStr);
+
+Gradebook openGradeBook(std::string fileName);
