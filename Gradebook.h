@@ -13,7 +13,7 @@ class Gradebook {
         
         int getYear() { return this->gbYear; }
         std::string getStudentName() { return this->studentName; }
-        std::vector<StudentClass> getClasses(int quarterNum);
+        std::vector<StudentClass>& getClasses(int quarterNum);
 
     
     private:

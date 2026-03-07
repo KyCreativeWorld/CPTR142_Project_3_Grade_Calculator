@@ -13,7 +13,11 @@ int main() {
     vector<string> prevGrades;
     vector<int> prevCredits;
 
-    openGradeBook(gbFileName);
+    Gradebook gb = openGradeBook(gbFileName);
+
+    for (StudentClass sClass : gb.getClasses(1)) {
+        cout << sClass.getClassName() << ": " << sClass.getClassCredits() << " Credits, " << sClass.getLetterGrade() << endl;
+    }
 
     return 0;
 }

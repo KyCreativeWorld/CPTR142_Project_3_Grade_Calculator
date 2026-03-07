@@ -4,15 +4,15 @@
 #include <cctype>
 #include <string>
 #include <cctype>
+#include <sstream>
 
 using namespace std;
 
 string trimWhitespace(string beforeStr) {
-    return beforeStr.substr(beforeStr.find_first_not_of(" \t\n"), beforeStr.find_last_not_of(" \t\n"));
-}
-
-void readToDos(string gbLine, string asgnOrExam) {
-
+    string afterStr = beforeStr.erase(0, beforeStr.find_first_not_of(" \n"));
+    afterStr = beforeStr.erase(beforeStr.find_last_not_of(" \n") + 1);
+    
+    return afterStr;
 }
 
 StudentClass readClass(string gbLine) {
@@ -28,7 +28,7 @@ StudentClass readClass(string gbLine) {
 
     try {
         tempStudentClass.setClassCredits(stoi(classLine.substr(0, classLine.find_first_of("Cc,"))));
-    } catch(std::invalid_argument excp) {
+    } catch(std::invalid_argument& excp) {
         cout << "<2> !!ERROR!! failed stoi" << endl;
     }
 
@@ -57,6 +57,9 @@ Gradebook openGradeBook(string fileName) {
     int curQuarter = 1;
     char curGradeType;
     string curClass;
+    string curContentType;
+    string curContentType2;
+    int curContentTypeNum;
 
     int curLine = 0;
 
@@ -71,7 +74,7 @@ Gradebook openGradeBook(string fileName) {
             if (gbLine.rfind("Year", 0) == 0) {
                 gradebook.setYear(stoi(gbLine.substr(gbLine.find_first_of("0123456789"))));
             }
-        } catch(std::invalid_argument excp) {
+        } catch(std::invalid_argument& excp) {
             cout << "<1> !!ERROR!! failed stoi on line " << curLine << endl;
         }
 
@@ -84,15 +87,38 @@ Gradebook openGradeBook(string fileName) {
             gradebook.addClass(readClass(gbLine), curQuarter);
             curClass = gradebook.getClasses(curQuarter).back().getClassName();
         }
-        if (gbLine.rfind("--", 0) == 0) {
-            if (trimWhitespace(gbLine.substr(gbLine.find_last_of("-") + 1)) == "Assignments") {
 
+        if (gbLine.rfind("--", 0) == 0) {
+            curContentType = trimWhitespace(gbLine.substr(gbLine.find_last_of("-") + 1));
+        }
+        if (gbLine.rfind("/\\", 0) == 0) {
+            int substrStart = gbLine.find_last_of("-/\\") + 1;
+            int substrEnd = gbLine.find_first_of(",");
+            string contentItem = trimWhitespace(gbLine.substr(substrStart, substrEnd - substrStart));
+            double contentWeight = 0;
+            double contentGrade = -1;
+            string tempContentLabel;
+
+            stringstream contentLine(gbLine.substr(gbLine.find_first_of(",") + 1));
+
+            contentLine >> tempContentLabel >> contentWeight;
+
+            if (gbLine.length() > 0) {
+                contentLine.ignore();
+                contentLine >> tempContentLabel >> contentGrade;
             }
+
+            gradebook.getClasses(curQuarter).back().addClassContent(contentItem, contentWeight, contentGrade, curContentType);
+
+            cout << gradebook.getClasses(curQuarter).back().getClassName()
+                 << ", Assignment Name: " << gradebook.getClasses(curQuarter).back().getAssignments(curContentType).rbegin()->first
+                 << ", Assignment Weight: " << gradebook.getClasses(curQuarter).back().getAssignments(curContentType).rbegin()->second.contentWeight
+                 << ", Assignment Grade: " << gradebook.getClasses(curQuarter).back().getAssignments(curContentType).rbegin()->second.contentGrade << endl;
         }
 
 
 
     }
-
+    gradeBookFile.close();
     return gradebook;
 }

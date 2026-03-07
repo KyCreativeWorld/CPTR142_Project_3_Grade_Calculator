@@ -21,8 +21,8 @@ void StudentClass::setGradeWeight(std::string letterGrade, int newGradeWeight) {
     if (letterGrade == "F") { gradeWeights.at(11) = newGradeWeight; }
 }
 
-void StudentClass::setGradeWeight(std::vector<int> newGradeWeight) {
-    gradeWeights = newGradeWeight;
+void StudentClass::setGradeWeight(std::vector<int> newGradeWeights) {
+    gradeWeights = newGradeWeights;
 }
 
 void StudentClass::setNumberGrade(std::string letterGrade) {
@@ -38,4 +38,12 @@ void StudentClass::setNumberGrade(std::string letterGrade) {
     if (letterGrade == "D") { this->numberGrade = 1.0; }
     if (letterGrade == "D-") { this->numberGrade = 0.7; }
     if (letterGrade == "F") { this->numberGrade = 0; }
+}
+
+void StudentClass::addClassContent(std::string contentItem, double contentWeight, double contentGrade, std::string contentType) {
+    if (contentType == "Exams") {
+        exams[contentItem] = {contentWeight, contentGrade};
+    } else {
+        assignments[contentItem] = {contentWeight, contentGrade};
+    }
 }

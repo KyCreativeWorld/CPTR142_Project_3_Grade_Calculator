@@ -19,7 +19,7 @@ void Gradebook::addClass(StudentClass newClass, int quarterNum = 1) {
     }
 }
 
-std::vector<StudentClass> Gradebook::getClasses(int quarterNum = 1) {
+std::vector<StudentClass>& Gradebook::getClasses(int quarterNum = 1) {
     switch(quarterNum) {
         case 1:
             return fallClasses;
