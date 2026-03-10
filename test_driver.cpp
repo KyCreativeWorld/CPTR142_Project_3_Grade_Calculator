@@ -15,8 +15,17 @@ int main() {
 
     Gradebook gb = openGradeBook(gbFileName);
 
-    for (StudentClass sClass : gb.getClasses(1)) {
-        cout << sClass.getClassName() << ": " << sClass.getClassCredits() << " Credits, " << sClass.getLetterGrade() << endl;
+    for (unsigned int i = 1; i <= 4; ++i) {
+        for (StudentClass sClass : gb.getClasses(i)) {
+            cout << sClass.getClassName() << ": " << sClass.getClassCredits() << " Credits, " << sClass.getLetterGrade() << endl;
+
+            if (sClass.getLetterGrade() == "NR") {
+                cout << sClass.getClassName()
+                 << ", Assignment Name: " << sClass.getAssignments("Assignments").rbegin()->first
+                 << ", Assignment Weight: " << sClass.getAssignments("Assignments").rbegin()->second.contentWeight
+                 << ", Assignment Grade: " << sClass.getAssignments("Assignments").rbegin()->second.contentGrade << endl;
+            }
+        }
     }
 
     return 0;
