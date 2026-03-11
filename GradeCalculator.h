@@ -5,7 +5,7 @@
 #include "StudentClass.h"
 
 // from chat becuse i am not familuir with maps and hw to work with them
-double computeWeightedAverage(const std::map<std::string, StudentClass::ContentInfo>& content);
+double computeWeightedAverage(const vector<StudentClass::ContentInfo>& content);
 
 // Determines the minimum final exam grade needed to hit the desired score.
 //

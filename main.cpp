@@ -1,5 +1,6 @@
 #include "openGradeBook.h"
 #include "quarterNumToString.h"
+#include "gpaCalculator.h"
 #include <iostream>
 
 using namespace std;
@@ -36,6 +37,7 @@ int main() {
         cout << endl;
     }
     // GPA
+    cout << "GPA: " << calculateTotalGPA(gb) << endl;
     // Projected GPA
 
     string classInput;
