@@ -38,6 +38,7 @@ void StudentClass::setNumberGrade(std::string letterGrade) {
     if (letterGrade == "D") { this->numberGrade = 1.0; }
     if (letterGrade == "D-") { this->numberGrade = 0.7; }
     if (letterGrade == "F") { this->numberGrade = 0; }
+    if (letterGrade == "NR") { this->numberGrade = -1; }
 }
 
 void StudentClass::addClassContent(std::string contentItem, double contentWeight, double contentGrade, std::string contentType) {
