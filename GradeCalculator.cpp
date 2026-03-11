@@ -3,6 +3,7 @@
 #include <vector>
 #include <string>
 using namespace std;
+//Attempt to update
 
 double computeWeightedAverage(const vector<StudentClass::ContentInfo>& content) {
     double weightedSum = 0.0;
