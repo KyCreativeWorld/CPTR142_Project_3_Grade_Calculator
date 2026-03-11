@@ -48,3 +48,7 @@ void StudentClass::addClassContent(std::string contentItem, double contentWeight
         assignments.push_back({contentItem, contentWeight, contentGrade});
     }
 }
+
+std::vector<int> StudentClass::getGradeWeights() const {
+    return gradeWeights;
+}

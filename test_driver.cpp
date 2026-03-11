@@ -20,6 +20,11 @@ int main() {
             cout << sClass.getClassName() << ": " << sClass.getClassCredits() << " Credits, " << sClass.getLetterGrade() << endl;
 
             if (sClass.getLetterGrade() == "NR") {
+                for (int gw : sClass.getGradeWeights()) {
+                    cout << gw << ", ";
+                }
+                cout << endl;
+
                 for (StudentClass::ContentInfo assignment : sClass.getAssignments("Assignments")) {
                     cout << sClass.getClassName()
                     << ", Assignment Name: " << assignment.contentName

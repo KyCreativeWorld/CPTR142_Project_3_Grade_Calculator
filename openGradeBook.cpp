@@ -88,6 +88,21 @@ Gradebook openGradeBook(string fileName) {
             curClass = gradebook.getClasses(curQuarter).back().getClassName();
         }
 
+        if (gbLine.rfind("**", 0) == 0) {
+            int substrStart = gbLine.find_last_of(":");
+            vector<int> tempGWeights;
+
+            unsigned int i = 0;
+            int substrEnd = gbLine.find_first_of(",");
+            while (substrEnd < gbLine.size() - 1) {
+                tempGWeights.push_back(stoi(gbLine.substr(substrStart, substrEnd - substrStart)));
+                substrStart = substrEnd;
+                substrEnd = gbLine.substr(substrEnd + 1).find_first_of(",");
+            }
+
+            gradebook.getClasses(curQuarter).back().setGradeWeight(tempGWeights);
+        }
+
         if (gbLine.rfind("--", 0) == 0) {
             curContentType = trimWhitespace(gbLine.substr(gbLine.find_last_of("-") + 1));
         }

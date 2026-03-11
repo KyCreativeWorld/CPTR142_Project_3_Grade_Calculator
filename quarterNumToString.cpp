@@ -1,6 +1,6 @@
 #include "quarterNumToString.h"
 
-std::string quarterNumToString(int num) {
+std::string quarterNumToString(int num = 1) {
     switch (num) {
         case 1:
             return "Fall";
