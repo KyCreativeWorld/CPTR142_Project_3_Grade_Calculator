@@ -23,7 +23,4 @@ class Gradebook {
         std::vector<StudentClass> winterClasses;
         std::vector<StudentClass> springClasses;
         std::vector<StudentClass> summerClasses;
-
-        std::vector<StudentClass> prevClasses;
-
 };

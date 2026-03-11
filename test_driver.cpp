@@ -24,6 +24,9 @@ int main() {
                  << ", Assignment Name: " << sClass.getAssignments("Assignments").rbegin()->first
                  << ", Assignment Weight: " << sClass.getAssignments("Assignments").rbegin()->second.contentWeight
                  << ", Assignment Grade: " << sClass.getAssignments("Assignments").rbegin()->second.contentGrade << endl;
+                 cout << "Exam Name: " << sClass.getAssignments("Exams").rbegin()->first
+                 << ", Exam Weight: " << sClass.getAssignments("Exams").rbegin()->second.contentWeight
+                 << ", Exam Grade: " << sClass.getAssignments("Exams").rbegin()->second.contentGrade << endl;
             }
         }
     }
