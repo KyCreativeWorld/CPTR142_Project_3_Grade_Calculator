@@ -109,11 +109,6 @@ Gradebook openGradeBook(string fileName) {
             }
 
             gradebook.getClasses(curQuarter).back().addClassContent(contentItem, contentWeight, contentGrade, curContentType);
-
-            cout << gradebook.getClasses(curQuarter).back().getClassName()
-                 << ", Assignment Name: " << gradebook.getClasses(curQuarter).back().getAssignments(curContentType).rbegin()->first
-                 << ", Assignment Weight: " << gradebook.getClasses(curQuarter).back().getAssignments(curContentType).rbegin()->second.contentWeight
-                 << ", Assignment Grade: " << gradebook.getClasses(curQuarter).back().getAssignments(curContentType).rbegin()->second.contentGrade << endl;
         }
 
 

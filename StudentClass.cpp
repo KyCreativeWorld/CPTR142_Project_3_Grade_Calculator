@@ -43,8 +43,8 @@ void StudentClass::setNumberGrade(std::string letterGrade) {
 
 void StudentClass::addClassContent(std::string contentItem, double contentWeight, double contentGrade, std::string contentType) {
     if (contentType == "Exams") {
-        exams[contentItem] = {contentWeight, contentGrade};
+        exams.push_back({contentItem, contentWeight, contentGrade});
     } else {
-        assignments[contentItem] = {contentWeight, contentGrade};
+        assignments.push_back({contentItem, contentWeight, contentGrade});
     }
 }
