@@ -89,15 +89,24 @@ Gradebook openGradeBook(string fileName) {
         }
 
         if (gbLine.rfind("**", 0) == 0) {
-            int substrStart = gbLine.find_last_of(":");
+            int substrStart = gbLine.find_last_of(":") + 1;
             vector<int> tempGWeights;
 
             unsigned int i = 0;
             int substrEnd = gbLine.find_first_of(",");
-            while (substrEnd < gbLine.size() - 1) {
-                tempGWeights.push_back(stoi(gbLine.substr(substrStart, substrEnd - substrStart)));
-                substrStart = substrEnd;
-                substrEnd = gbLine.substr(substrEnd + 1).find_first_of(",");
+            while (substrEnd < gbLine.size() - 1 && i < 15) {
+                ++i;
+                try {
+                    tempGWeights.push_back(stoi(gbLine.substr(substrStart, substrEnd - substrStart)));
+                } catch (...) {
+                    // cout << "Failed stoi for: [" << gbLine.substr(substrStart, substrEnd - substrStart) << "]" << endl;
+                }
+                substrStart = substrEnd + 1;
+                substrEnd += gbLine.substr(substrEnd + 1).find_first_of(",") + 1;
+
+                if (tempGWeights.back() == 0) {
+                    break;
+                }
             }
 
             gradebook.getClasses(curQuarter).back().setGradeWeight(tempGWeights);
