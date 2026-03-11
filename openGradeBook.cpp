@@ -93,17 +93,20 @@ Gradebook openGradeBook(string fileName) {
             vector<int> tempGWeights;
 
             unsigned int i = 0;
-            int substrEnd = gbLine.find_first_of(",") + 1;
-            while (substrEnd < gbLine.size() - 1 && tempGWeights.back() == 0 && i < 100) {
+            int substrEnd = gbLine.find_first_of(",");
+            while (substrEnd < gbLine.size() - 1 && i < 15) {
                 ++i;
                 try {
                     tempGWeights.push_back(stoi(gbLine.substr(substrStart, substrEnd - substrStart)));
-                    cout << "<" << tempGWeights.back() << "> ";
                 } catch (...) {
-                    cout << "Failed stoi for: [" << gbLine.substr(substrStart, substrEnd - substrStart) << "]" << endl;
+                    // cout << "Failed stoi for: [" << gbLine.substr(substrStart, substrEnd - substrStart) << "]" << endl;
                 }
-                substrStart = substrEnd;
+                substrStart = substrEnd + 1;
                 substrEnd += gbLine.substr(substrEnd + 1).find_first_of(",") + 1;
+
+                if (tempGWeights.back() == 0) {
+                    break;
+                }
             }
 
             gradebook.getClasses(curQuarter).back().setGradeWeight(tempGWeights);
