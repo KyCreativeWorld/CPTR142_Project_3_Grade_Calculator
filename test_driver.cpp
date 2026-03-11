@@ -20,13 +20,17 @@ int main() {
             cout << sClass.getClassName() << ": " << sClass.getClassCredits() << " Credits, " << sClass.getLetterGrade() << endl;
 
             if (sClass.getLetterGrade() == "NR") {
-                cout << sClass.getClassName()
-                 << ", Assignment Name: " << sClass.getAssignments("Assignments").rbegin()->first
-                 << ", Assignment Weight: " << sClass.getAssignments("Assignments").rbegin()->second.contentWeight
-                 << ", Assignment Grade: " << sClass.getAssignments("Assignments").rbegin()->second.contentGrade << endl;
-                 cout << "Exam Name: " << sClass.getAssignments("Exams").rbegin()->first
-                 << ", Exam Weight: " << sClass.getAssignments("Exams").rbegin()->second.contentWeight
-                 << ", Exam Grade: " << sClass.getAssignments("Exams").rbegin()->second.contentGrade << endl;
+                for (StudentClass::ContentInfo assignment : sClass.getAssignments("Assignments")) {
+                    cout << sClass.getClassName()
+                    << ", Assignment Name: " << assignment.contentName
+                    << ", Assignment Weight: " << assignment.contentWeight
+                    << ", Assignment Grade: " << assignment.contentGrade << endl;
+                }
+                for (StudentClass::ContentInfo exam : sClass.getAssignments("Exams")) {
+                    cout << "Exam Name: " << exam.contentName
+                    << ", Exam Weight: " << exam.contentWeight
+                    << ", Exam Grade: " << exam.contentGrade << endl;
+                }
             }
         }
     }

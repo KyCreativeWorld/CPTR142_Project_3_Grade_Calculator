@@ -7,6 +7,7 @@
 class StudentClass {
     public:
         struct ContentInfo {
+            std::string contentName;
             double contentWeight;
             double contentGrade;
         };
@@ -23,11 +24,11 @@ class StudentClass {
         double getNumberGrade() { return numberGrade; }
         std::string getClassName() { return className; }
         int getClassCredits() { return classCredits; }
-        std::map<std::string, ContentInfo>& getAssignments(std::string contentType = "Assignments") {
+        std::vector<ContentInfo>& getAssignments(std::string contentType = "Assignments") {
             if (contentType == "Exams") { return exams; 
             } else { return assignments; }
         }
-        std::map<std::string, ContentInfo>& getExams() { return exams; }
+        std::vector<ContentInfo>& getExams() { return exams; }
 
     private:
         std::string letterGrade;
@@ -36,8 +37,8 @@ class StudentClass {
         std::string className;
         std::vector<int> gradeWeights;
 
-        std::map<std::string, ContentInfo> assignments;
-        std::map<std::string, ContentInfo> exams;
+        std::vector<ContentInfo> assignments;
+        std::vector<ContentInfo> exams;
         
         void setNumberGrade(std::string letterGrade);
 };
