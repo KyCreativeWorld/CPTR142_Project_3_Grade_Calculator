@@ -8,6 +8,7 @@
 
 using namespace std;
 
+//Still trying to update
 //Selected quarter
 double calculateTotalGPA(Gradebook& gb, int selectedQuarter) {
     double totalWeightedPoints = 0.0;
