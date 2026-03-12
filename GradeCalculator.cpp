@@ -29,15 +29,7 @@ double calcRequiredFinalExamGrade(StudentClass& cls, double desiredGrade) {
     vector<StudentClass::ContentInfo> exams = cls.getExams();
     vector<StudentClass::ContentInfo> assignments = cls.getAssignments("Assignments");
 
-    double finalExamWeight = 0.0;
-    
-    //Find the weight of the ungraded final exam
-    for (const auto& info : exams) {
-        if (info.contentGrade < 0.0) {
-            finalExamWeight = info.contentWeight;
-            break; 
-        }
-    }
+    double finalExamWeight = exams.back().contentWeight;
 
     if (finalExamWeight <= 0.0) {
         cout << "Error: no ungraded exam entry found to act as the 'Final'." << endl;
@@ -46,15 +38,17 @@ double calcRequiredFinalExamGrade(StudentClass& cls, double desiredGrade) {
 
     //Averages
     double assignmentAvg = computeWeightedAverage(assignments);
-    double gradedExamAvg = 0.0;
+    double gradedExamAvg = 0;
     double gradedExamWeight = 0.0;
     double assignmentWeight = 0.0;
+    double totalWeight = 0.0;
 
     //Calculate totals for assignments
     for (const auto& info : assignments) {
         if (info.contentGrade >= 0.0) {
             assignmentWeight += info.contentWeight;
         }
+        totalWeight += info.contentWeight;
     }
 
     //Calculate totals for exams that ARE graded
@@ -63,22 +57,22 @@ double calcRequiredFinalExamGrade(StudentClass& cls, double desiredGrade) {
             gradedExamAvg += (info.contentGrade * info.contentWeight);
             gradedExamWeight += info.contentWeight;
         }
+        totalWeight += info.contentWeight;
     }
 
-    //weighted average for exams already taken
+    // weighted average for exams already taken
     if (gradedExamWeight > 0.0) {
         gradedExamAvg = gradedExamAvg / gradedExamWeight;
     }
 
-    double alreadyEarned = (assignmentWeight * assignmentAvg) + (gradedExamWeight * gradedExamAvg);
-    
     //Math: (Desired - PointsAlreadyEarned) / WeightOfRemainingFinal
-    double requiredFinal = (desiredGrade - alreadyEarned) / finalExamWeight;
+    double alreadyEarned = (assignmentWeight * assignmentAvg) + (gradedExamWeight * gradedExamAvg);
+    double requiredFinal = ((desiredGrade * totalWeight) - alreadyEarned) / finalExamWeight;
 
     return requiredFinal;
 }
 
-void processGradeGoal(Gradebook& gb, int quarterNum, string className, double desiredGrade) {
+void processGradeGoal(Gradebook& gb, int quarterNum, const string& className, double desiredGrade) {
     vector<StudentClass>& classes = gb.getClasses(quarterNum);
     StudentClass* target = nullptr;
 
@@ -107,7 +101,7 @@ void processGradeGoal(Gradebook& gb, int quarterNum, string className, double de
 
     if (required > 100.0) {
         cout << "Required Final Exam:    " << required << "%" << endl;
-        cout << "Note: This goal is mathematically impossible." << endl;
+        cout << "Note: This goal is mathematically impossible without extra credit." << endl;
     } else if (required <= 0.0) {
         cout << "Required Final Exam:    0% (Goal already met!)" << endl;
     } else {
