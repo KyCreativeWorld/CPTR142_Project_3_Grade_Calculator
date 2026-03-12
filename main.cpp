@@ -1,6 +1,7 @@
 #include "openGradeBook.h"
 #include "quarterNumToString.h"
 #include "gpaCalculator.h"
+#include "GradeCalculator.h"
 #include <iostream>
 
 using namespace std;
@@ -88,6 +89,14 @@ int main() {
 
                         cout << endl;
                     }
+
+                    // Grade Calculator
+                    double desiredGrade;
+                    cout << "\nWhat final grade are you aiming for in " << sClass.getClassName() << "? (e.g. 90)" << endl << "> ";
+                    cin >> desiredGrade;
+                    cin.ignore();
+
+                    processGradeGoal(gb, i, sClass.getClassName(), desiredGrade);
                     
                     string assignmentInput;
 
