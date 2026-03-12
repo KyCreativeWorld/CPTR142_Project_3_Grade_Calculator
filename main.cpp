@@ -36,9 +36,18 @@ int main() {
 
         cout << endl;
     }
-    // GPA
-    cout << "GPA: " << calculateTotalGPA(gb) << endl;
-    // Projected GPA
+    //GPA
+    int choice;
+    cout << "Which quarter's GPA would you like to see? (1-4): ";
+    if (!(cin >> choice)) {
+        choice = 1; //Default
+    }
+
+    //Calls GPA calculator function
+    calculateTotalGPA(gb, choice);
+
+    // CRITICAL: Clear buffer before the 'while' loop starts using getline
+    cin.ignore(1000, '\n');
 
     string classInput;
 
