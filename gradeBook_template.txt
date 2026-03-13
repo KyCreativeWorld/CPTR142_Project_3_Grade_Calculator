@@ -31,7 +31,7 @@ Spring:
 Classes:
 <> S Class, 4 Credit, NR
 ---- Assignments
-/\---- First Assignment, Weight: 15
+/\---- First Assignment, Weight: 15, Grade: 95
 /\---- Second Assignment, Weight: 15
 ---- Exams
 /\---- First Exam, Weight: 20

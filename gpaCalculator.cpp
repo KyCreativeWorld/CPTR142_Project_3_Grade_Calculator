@@ -41,19 +41,22 @@ double calculateTotalGPA(Gradebook& gb, int selectedQuarter) {
     }
 
     //Output the specific quarter requested
-    cout << "\n--- " << quarterNumToString(selectedQuarter) << " Quarter Results ---" << endl;
+    // cout << "\n--- " << quarterNumToString(selectedQuarter) << " Quarter Results ---" << endl;
     if (targetQuarterCredits > 0) {
-        cout << "Quarter GPA: " << fixed << setprecision(2) 
-             << (targetQuarterPoints / targetQuarterCredits) << endl;
-    } else {
-        cout << "No grades found for this quarter." << endl;
+        // cout << "Quarter GPA: " << fixed << setprecision(2) 
+        //      << (targetQuarterPoints / targetQuarterCredits) << endl;
+        cout << quarterNumToString(selectedQuarter) << " GPA: " << fixed 
+             << setprecision(2) << (targetQuarterPoints / targetQuarterCredits) << endl;
     }
+    // } else {
+    //     cout << "No grades found for this quarter." << endl;
+    // }
 
     //Output the cumulative GPA
     if (totalCredits == 0) return 0.0;
     
     double cumulativeGPA = totalWeightedPoints / totalCredits;
-    cout << "Overall Cumulative GPA: " << fixed << setprecision(2) << cumulativeGPA << endl;
+    //cout << "Overall Cumulative GPA: " << fixed << setprecision(2) << cumulativeGPA << endl;
     
     return cumulativeGPA;
 }

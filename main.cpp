@@ -3,8 +3,23 @@
 #include "gpaCalculator.h"
 #include "GradeCalculator.h"
 #include <iostream>
+#include <iomanip>
+#include <typeinfo>
 
 using namespace std;
+
+double getValidDouble() {
+    double d;
+
+    if (cin >> d) {
+        return d;
+    } else {
+        cin.clear();
+        cin.ignore();
+
+        return -1.0;
+    }
+}
 
 int main() {
     string gbName;
@@ -23,10 +38,10 @@ int main() {
     for (unsigned int i = 1; i < 5; ++i) {
         if (gb.getClasses(i).size() < 1) { break; }
 
-        cout << "<>-- " << quarterNumToString(i) << " --<>" << endl;
+        cout << "=== " << quarterNumToString(i) << " ===" << endl;
 
         for (StudentClass sClass : gb.getClasses(i)) {
-            cout << "< " << sClass.getClassName() << " > Credits: " << sClass.getClassCredits();
+            cout << "" << sClass.getClassName() << " | Credits: " << sClass.getClassCredits();
 
             if (sClass.getLetterGrade() != "NR") {
                 cout << ", Grade: " << sClass.getLetterGrade() << endl;
@@ -38,17 +53,18 @@ int main() {
         cout << endl;
     }
     //GPA
-    int choice;
-    cout << "Which quarter's GPA would you like to see? (1-4): ";
-    if (!(cin >> choice)) {
-        choice = 1; //Default
-    }
 
     //Calls GPA calculator function
-    calculateTotalGPA(gb, choice);
+    double cumulativeGPA = calculateTotalGPA(gb, 1);
+
+    for (unsigned int i = 2; i < 5; ++i) {
+        calculateTotalGPA(gb, i);
+    }
+
+    cout << "Overall Cumulative GPA: " << fixed << setprecision(2) << cumulativeGPA << endl;
 
     // CRITICAL: Clear buffer before the 'while' loop starts using getline
-    cin.ignore(1000, '\n');
+    //cin.ignore(1000, '\n');
 
     string classInput;
 
@@ -64,45 +80,54 @@ int main() {
                 if (sClass.getClassName() == classInput) {
                     foundClass = true;
 
-                    cout << endl << sClass.getClassName() << endl;
+                    cout << endl << "= " << left << setfill('=') << setw(41) << (sClass.getClassName() + " ") << endl;
+                    cout << "|          Name          | Weight | Grade |" << endl;
 
-                    cout << "[Assignments]" << endl;
+                    cout << "| " << left << setfill('-') << setw(23) << "ASSIGNMENTS" << right << "|"
+                         << setfill('-') << setw(9) << "|" << setfill('-') << setw(8) << "|" << endl;
+
                     for (StudentClass::ContentInfo assignment : sClass.getAssignments("Assignments")) {
-                        cout << "< " << assignment.contentName
-                             << "> Weight: " << assignment.contentWeight;
+                        cout << "| " << left << setfill(' ') << setw(23) << assignment.contentName << "|"
+                             << right << setfill(' ') << setw(7) << noshowpoint << static_cast<int>(assignment.contentWeight) << " | ";
                         
                         if (assignment.contentGrade != -1) {
-                            cout << ", Grade: " << assignment.contentGrade;
+                            cout << right << setfill(' ') << setw(5) << noshowpoint << static_cast<int>(assignment.contentGrade);
+                        } else {
+                            cout << setfill(' ') << setw(5) << "";
                         }
 
-                        cout << endl;
+                        cout << " |" << endl;
                     }
 
-                    cout << "[Exams]" << endl;
+
+
+                    cout << "| " << left << setfill('-') << setw(23) << "EXAMS" << right << "|"
+                         << setfill('-') << setw(9) << "|" << setfill('-') << setw(8) << "|" << endl;
+
                     for (StudentClass::ContentInfo exam : sClass.getAssignments("Exams")) {
-                        cout << "< " << exam.contentName
-                             << " > Weight: " << exam.contentWeight;
+                        cout << "| " << left << setfill(' ') << setw(23) << exam.contentName << "|"
+                             << right << setfill(' ') << setw(7) << noshowpoint << static_cast<int>(exam.contentWeight) << " | ";
                         
                         if (exam.contentGrade != -1) {
-                            cout << ", Grade: " << exam.contentGrade;
+                            cout << right << setfill(' ') << setw(5) << noshowpoint << static_cast<int>(exam.contentGrade);
+                        } else {
+                            cout << setfill(' ') << setw(5) << "";
                         }
 
-                        cout << endl;
+                        cout << " |" << endl;
                     }
+                    cout << "===========================================";
 
                     // Grade Calculator
                     double desiredGrade;
-                    cout << "\nWhat final grade are you aiming for in " << sClass.getClassName() << "? (e.g. 90)" << endl << "> ";
-                    cin >> desiredGrade;
-                    cin.ignore();
 
-                    processGradeGoal(gb, i, sClass.getClassName(), desiredGrade);
-                    
-                    string assignmentInput;
+                    cout << "\nWhat grade are you aiming for in " << sClass.getClassName() << "? (e.g. 90) (-1 to exit)" << endl << "> ";
+                    desiredGrade = getValidDouble();
+                    while(desiredGrade > 0.0) {  
+                        processGradeGoal(gb, i, sClass.getClassName(), desiredGrade);
 
-                    getline(cin, assignmentInput);
-                    while(assignmentInput != "quit" && assignmentInput != "q" && assignmentInput != "Quit" && classInput != "Q") {                   
-                        getline(cin, assignmentInput); // FIXME: Work in progress
+                        cout << "\nWhat grade are you aiming for in " << sClass.getClassName() << "? (e.g. 90) (-1 to exit)" << endl << "> ";
+                        desiredGrade = getValidDouble();
                     }
 
 
