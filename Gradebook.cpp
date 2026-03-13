@@ -1,6 +1,7 @@
 #include "Gradebook.h"
 
 void Gradebook::addClass(StudentClass newClass, int quarterNum = 1) {
+    // Sees which quarter was inputted and puts the class in that quarter's vector
     switch(quarterNum) {
         case 1:
             fallClasses.push_back(newClass);
@@ -20,6 +21,7 @@ void Gradebook::addClass(StudentClass newClass, int quarterNum = 1) {
 }
 
 std::vector<StudentClass>& Gradebook::getClasses(int quarterNum = 1) {
+    // Returns the vector of StudentClasses for the inputted quarter
     switch(quarterNum) {
         case 1:
             return fallClasses;

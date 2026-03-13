@@ -101,58 +101,69 @@ Gradebook openGradeBook(string fileName) {
             curClass = gradebook.getClasses(curQuarter).back().getClassName();
         }
 
-        // If the line start with the 
+        // If the line start with the grade weight code
         if (gbLine.rfind("**", 0) == 0) {
-            int substrStart = gbLine.find_last_of(":") + 1;
+            int substrStart = gbLine.find_last_of(":") + 1; // Start after the code
             vector<int> tempGWeights;
 
             unsigned int i = 0;
-            int substrEnd = gbLine.find_first_of(",");
+            int substrEnd = gbLine.find_first_of(","); // End of this number is before the ','
+            // While the end of the substring isn't at the end of the line
             while (substrEnd < gbLine.size() - 1 && i < 15) {
                 ++i;
-                try {
+                try { // Add this number to the temporary grade weights vector
                     tempGWeights.push_back(stoi(gbLine.substr(substrStart, substrEnd - substrStart)));
                 } catch (...) {
                     // Error code for testing
                     // cout << "Failed stoi for: [" << gbLine.substr(substrStart, substrEnd - substrStart) << "]" << endl;
                 }
-                substrStart = substrEnd + 1;
+                substrStart = substrEnd + 1; // Move to the next number
                 substrEnd += gbLine.substr(substrEnd + 1).find_first_of(",") + 1;
 
-                if (tempGWeights.back() == 0) {
-                    break;
+                if (tempGWeights.back() == 0) { // If the last number has been read
+                    break; // Finish
                 }
             }
 
+            // Set the latest class's (current class's) grade weight to this grade weight
             gradebook.getClasses(curQuarter).back().setGradeWeight(tempGWeights);
         }
 
+        // If the line starts with the content (assignments/exams) code
         if (gbLine.rfind("--", 0) == 0) {
+            // Set the current content type to the trimmed string ("Assignments"/"Exams")
             curContentType = trimWhitespace(gbLine.substr(gbLine.find_last_of("-") + 1));
         }
-        if (gbLine.rfind("/\\", 0) == 0) {
-            int substrStart = gbLine.find_last_of("-/\\") + 1;
+        if (gbLine.rfind("/\\", 0) == 0) { // If the line starts with the content item code
+            int substrStart = gbLine.find_last_of("-/\\") + 1; // Trim the code out
             int substrEnd = gbLine.find_first_of(",");
+            // Content item's name is the first part of the line
             string contentItem = trimWhitespace(gbLine.substr(substrStart, substrEnd - substrStart));
+            
+            // Initializes variables to be edited
             double contentWeight = 0;
             double contentGrade = -1;
             string tempContentLabel;
 
+            // Creates a stringstream to read the rest of the line from
             stringstream contentLine(gbLine.substr(gbLine.find_first_of(",") + 1));
 
+            // Put the comma in a junk variable, put the weight into contentWeight
             contentLine >> tempContentLabel >> contentWeight;
 
-            if (gbLine.length() > 0) {
+            if (gbLine.length() > 0) { // If there is a grade
                 contentLine.ignore();
+                // Put the comma in a junk variable, put the grade into contentGrade
                 contentLine >> tempContentLabel >> contentGrade;
             }
 
+            // Add a content item to the class using the items found on this line
             gradebook.getClasses(curQuarter).back().addClassContent(contentItem, contentWeight, contentGrade, curContentType);
         }
 
 
 
     }
-    gradeBookFile.close();
-    return gradebook;
+    gradeBookFile.close(); // Close the file
+    return gradebook; // Return the filled out gradebook
 }
