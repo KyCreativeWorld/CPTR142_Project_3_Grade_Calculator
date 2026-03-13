@@ -80,14 +80,14 @@ int main() {
                 if (sClass.getClassName() == classInput) {
                     foundClass = true;
 
-                    cout << endl << "= " << left << setfill('=') << setw(41) << (sClass.getClassName() + " ") << endl;
-                    cout << "|          Name          | Weight | Grade |" << endl;
+                    cout << endl << "= " << left << setfill('=') << setw(51) << (sClass.getClassName() + " ") << endl;
+                    cout << "|               Name               | Weight | Grade |" << endl;
 
-                    cout << "| " << left << setfill('-') << setw(23) << "ASSIGNMENTS" << right << "|"
+                    cout << "| " << left << setfill('-') << setw(33) << "ASSIGNMENTS" << right << "|"
                          << setfill('-') << setw(9) << "|" << setfill('-') << setw(8) << "|" << endl;
 
                     for (StudentClass::ContentInfo assignment : sClass.getAssignments("Assignments")) {
-                        cout << "| " << left << setfill(' ') << setw(23) << assignment.contentName << "|"
+                        cout << "| " << left << setfill(' ') << setw(33) << assignment.contentName << "|"
                              << right << setfill(' ') << setw(7) << noshowpoint << static_cast<int>(assignment.contentWeight) << " | ";
                         
                         if (assignment.contentGrade != -1) {
@@ -101,11 +101,11 @@ int main() {
 
 
 
-                    cout << "| " << left << setfill('-') << setw(23) << "EXAMS" << right << "|"
+                    cout << "| " << left << setfill('-') << setw(33) << "EXAMS" << right << "|"
                          << setfill('-') << setw(9) << "|" << setfill('-') << setw(8) << "|" << endl;
 
                     for (StudentClass::ContentInfo exam : sClass.getAssignments("Exams")) {
-                        cout << "| " << left << setfill(' ') << setw(23) << exam.contentName << "|"
+                        cout << "| " << left << setfill(' ') << setw(33) << exam.contentName << "|"
                              << right << setfill(' ') << setw(7) << noshowpoint << static_cast<int>(exam.contentWeight) << " | ";
                         
                         if (exam.contentGrade != -1) {
@@ -116,18 +116,20 @@ int main() {
 
                         cout << " |" << endl;
                     }
-                    cout << "===========================================";
+                    cout << setfill('=') << setw(53) << "";
 
                     // Grade Calculator
                     double desiredGrade;
 
                     cout << "\nWhat grade are you aiming for in " << sClass.getClassName() << "? (e.g. 90) (-1 to exit)" << endl << "> ";
                     desiredGrade = getValidDouble();
+                    cin.ignore();
                     while(desiredGrade > 0.0) {  
                         processGradeGoal(gb, i, sClass.getClassName(), desiredGrade);
 
                         cout << "\nWhat grade are you aiming for in " << sClass.getClassName() << "? (e.g. 90) (-1 to exit)" << endl << "> ";
                         desiredGrade = getValidDouble();
+                        cin.ignore();
                     }
 
 

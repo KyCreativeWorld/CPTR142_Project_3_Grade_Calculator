@@ -1,0 +1,69 @@
+Year: 2025-2026
+
+Quarter:
+
+Fall:
+Classes:
+<> Biology 106, 4 Credit, A
+<> Calculus I, 4 Credit, A-
+<> Intro to Psyc, 4 Credit, A
+<> Fundamentals of Programming I, 4 Credit, A
+
+Winter:
+Classes:
+
+<> Analytical Writing, 3 Credit, NR
+** Grade Weights: 93, 90, 87, 83, 80, 77, 73, 70, 67, 63, 60, 0
+---- Assignments
+/\---- Early Draft of Essay 1, Weight: 5, Grade: 95
+/\---- Final Draft of Essay 1, Weight: 10
+/\---- Early Draft of Essay 2, Weight: 5, Grade: 100
+/\---- Final Draft of Essay 2, Weight: 15
+/\---- Early Draft of Essay 3, Weight: 5, Grade: 100
+/\---- Final Draft of Essay 3, Weight: 20
+/\---- Participation, Weight: 5, Grade: 100
+/\---- Peer Reviews, Weight: 5, Grade: 100
+/\---- Quizzes, Weight: 10, Grade: 100
+---- Exams
+/\---- Midterm Essay Exam, Weight: 5, Grade: 92
+/\---- Final Essay Exam, Weight: 15
+
+<> Small Group Comm, 4 Credit, NR
+** Grade Weights: 94, 90, 87, 83, 80, 77, 73, 70, 67, 63, 60, 0
+---- Assignments
+/\---- Chapter Presentation Project, Weight: 300, Grade: 95.49
+/\---- Persuasive Items, Weight: 181, Grade: 91
+/\---- Persuasive Presentation, Weight: 60
+/\---- Persuasive Reflection Paper, Weight: 80
+---- Exams
+/\---- Exam 1, Weight: 50, Grade: 100
+/\---- Exam 2, Weight: 60, Grade: 98
+/\---- Final, Weight: 65
+
+<> Calculus II, 4 Credit, NR
+** Grade Weights: 92, 90, 88, 82, 80, 78, 72, 70, 68, 62, 60, 0
+---- Assignments
+/\---- WeBWorKs, Weight: 60, Grade: 100
+---- Exams
+/\---- Exam 1, Weight: 50, Grade 98
+/\---- Exam 2, Weight: 50, Grade 98
+/\---- Exam 3, Weight: 50
+/\---- Final Exam, Weight: 90
+
+<> Fundamentals of Programming II, 4 Credit, NR
+---- Assignments
+/\---- Concepts, Weight: 30, Grade: 100
+---- Exams
+/\---- Project 1, Weight: 50, Grade: 100
+/\---- Project 2, Weight: 50, Grade: 100
+/\---- Project 3, Weight: 50
+
+
+
+Spring:
+Classes:
+
+
+Summer:
+Classes:
+

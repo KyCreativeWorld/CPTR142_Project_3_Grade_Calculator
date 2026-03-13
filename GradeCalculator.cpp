@@ -24,7 +24,7 @@ double computeWeightedAverage(const vector<StudentClass::ContentInfo>& content) 
     }
 
     if (!foundAGrade) {
-        return 87;
+        return DEFAULT_GRADE;
     }
     
     if (totalWeight == 0.0) {
@@ -51,6 +51,8 @@ double calcRequiredFinalExamGrade(StudentClass& cls, double desiredGrade) {
     }
 
     //Averages
+    double avgAssignmentsGrade = computeWeightedAverage(assignments);
+    double avgExamsGrade = computeWeightedAverage(exams);
     double examWeight = 0.0;
     double assignmentWeight = 0.0;
     double totalWeight = 0.0;
@@ -62,7 +64,7 @@ double calcRequiredFinalExamGrade(StudentClass& cls, double desiredGrade) {
         if (info.contentGrade >= 0.0) {
             alreadyEarned += (info.contentGrade * info.contentWeight);
         } else {
-            alreadyEarned += (DEFAULT_GRADE * info.contentWeight);
+            alreadyEarned += (avgAssignmentsGrade * info.contentWeight);
         }
 
         totalWeight += info.contentWeight;
@@ -74,7 +76,7 @@ double calcRequiredFinalExamGrade(StudentClass& cls, double desiredGrade) {
             if (exams.at(i).contentGrade >= 0.0) {
                 alreadyEarned += (exams.at(i).contentGrade * exams.at(i).contentWeight);
             } else {
-                alreadyEarned += (DEFAULT_GRADE * exams.at(i).contentWeight);
+                alreadyEarned += (avgExamsGrade* exams.at(i).contentWeight);
             }
         }
 
